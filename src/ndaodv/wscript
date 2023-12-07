@@ -1,0 +1,44 @@
+# -*- Mode: python; py-indent-offset: 4; indent-tabs-mode: nil; coding: utf-8; -*-
+
+# def options(opt):
+#     pass
+
+# def configure(conf):
+#     conf.check_nonfatal(header_name='stdint.h', define_name='HAVE_STDINT_H')
+
+def build(bld):
+    module = bld.create_ns3_module('ndaodv', ['internet', 'wifi'])
+    module.source = [
+        'model/ndaodv-id-cache.cc',
+        'model/ndaodv-dpd.cc',
+        'model/ndaodv-rtable.cc',
+        'model/ndaodv-rqueue.cc',
+        'model/ndaodv-packet.cc',
+        'model/ndaodv-neighbor.cc',
+        'model/ndaodv-routing-protocol.cc',
+        'helper/ndaodv-helper.cc',
+        ]
+
+    module_test = bld.create_ns3_module_test_library('ndaodv')
+    module_test.source = [
+        'test/ndaodv-test-suite.cc',
+        ]
+
+    headers = bld(features='ns3header')
+    headers.module = 'ndaodv'
+    headers.source = [
+        'model/ndaodv-id-cache.h',
+        'model/ndaodv-dpd.h',
+        'model/ndaodv-rtable.h',
+        'model/ndaodv-rqueue.h',
+        'model/ndaodv-packet.h',
+        'model/ndaodv-neighbor.h',
+        'model/ndaodv-routing-protocol.h',
+        'helper/ndaodv-helper.h',
+        ]
+
+    if bld.env.ENABLE_EXAMPLES:
+        bld.recurse('examples')
+
+    bld.ns3_python_bindings()
+

@@ -1,0 +1,8 @@
+Time [us], Packet Type, Length [B], Description, Context
+
+AODV overhead [packets]:,0
+AODV overhead [kB]:,0
+RREQ [packets]:,0
+RREP [packets]:,0
+RERR [packets]:,0
+RREP_ACK [packets]:,0
